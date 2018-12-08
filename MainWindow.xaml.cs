@@ -47,7 +47,10 @@ namespace GlobalClock
 
         private static string GetTimeForTimeZone(string timezone)
         {
-            return SystemClock.Instance.InZone(DateTimeZoneProviders.Tzdb[timezone]).GetCurrentTimeOfDay().ToString("HH:mm", null);
+            return SystemClock.Instance
+                .InZone(DateTimeZoneProviders.Tzdb[timezone])
+                .GetCurrentTimeOfDay()
+                .ToString("HH:mm", null);
         }
     }
 }
