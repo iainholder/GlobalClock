@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows;
 using System.Windows.Forms;
 using NodaTime;
+using NodaTime.Extensions;
 
 namespace GlobalClock
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly NotifyIcon _notifyIcon;
 
@@ -41,12 +41,13 @@ namespace GlobalClock
             string cpt = GetTimeForTimeZone("Africa/Johannesburg");
             string tky = GetTimeForTimeZone("Asia/Tokyo");
 
+            // ReSharper disable once LocalizableElement
             _notifyIcon.Text = $"SFO {sfo} | NYC {nyc} | LON {lon} | CPT {cpt} | TKY {tky}";
         }
 
         private static string GetTimeForTimeZone(string timezone)
         {
-            return SystemClock.Instance.Now.InZone(DateTimeZoneProviders.Tzdb[timezone]).TimeOfDay.ToString("HH:mm", null);
+            return SystemClock.Instance.InZone(DateTimeZoneProviders.Tzdb[timezone]).GetCurrentTimeOfDay().ToString("HH:mm", null);
         }
     }
 }
