@@ -22,7 +22,7 @@ namespace GlobalClock
                 {
                     Items =
                     {
-                        new ToolStripMenuItem("Exit", null, (sender, args) => Close()),
+                        new ToolStripMenuItem("Exit", null, (_, _) => Close()),
                     }
                 }
             };
