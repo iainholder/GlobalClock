@@ -5,8 +5,8 @@ Windows system tray application that displays multiple timezone clocks. No main 
 ## Tech Stack
 
 - **Language:** C#
-- **Framework:** .NET Framework 4.6.1 (WPF + WinForms NotifyIcon)
-- **Key dependency:** NodaTime 2.4.7 (timezone handling via TZDB)
+- **Framework:** .NET 10 (WPF + WinForms NotifyIcon), SDK-style project
+- **Key dependency:** NodaTime 3.x (timezone handling via TZDB)
 - **Output type:** WinExe (no console)
 
 ## Project Structure
@@ -29,13 +29,10 @@ Single-project solution. No test projects.
 ## Build
 
 ```powershell
-msbuild GlobalClock.sln /p:Configuration=Release
+dotnet build
+dotnet publish -c Release
 ```
-
-MSBuild is at `D:\visualstudio-2026`.
 
 ## Notes
 
-- The `upgrade-to-NET10` branch contains work to migrate from .NET Framework 4.6.1 to .NET 10
 - Timezones are hardcoded in `MainWindow.xaml.cs` (SFO, NYC, LON, CPT, TKY)
-- NuGet packages managed via `packages.config`

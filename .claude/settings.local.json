@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(cd /d/source/repos/GlobalClock && dotnet build 2>&1)"
     ]
   }
 }

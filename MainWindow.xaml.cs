@@ -18,10 +18,10 @@ namespace GlobalClock
             {
                 Icon = new Icon("Earth-icon.ico"),
                 Visible = true,
-                ContextMenu = new ContextMenu()
+                ContextMenuStrip = new ContextMenuStrip()
             };
 
-            _notifyIcon.ContextMenu.MenuItems.Add(new MenuItem("Exit", (sender, args) => Close()));
+            _notifyIcon.ContextMenuStrip.Items.Add("Exit", null, (sender, args) => Close());
 
             var timer = new Timer
             {
@@ -42,7 +42,7 @@ namespace GlobalClock
             string tky = GetTimeForTimeZone("Asia/Tokyo");
 
             // ReSharper disable once LocalizableElement
-            _notifyIcon.Text = $"SFO {sfo} | NYC {nyc} | LON {lon} | CPT {cpt} | TKY {tky}";
+            _notifyIcon.Text = $"SFO {sfo} | NYC {nyc} | LON {lon} | TKY {tky}";
         }
 
         private static string GetTimeForTimeZone(string timezone)
