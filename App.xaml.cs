@@ -1,24 +1,22 @@
-using System.Drawing;
 using System.IO;
 using Forms = System.Windows.Forms;
 
 namespace GlobalClock;
 
-public partial class App : System.Windows.Application
+public partial class App
 {
-    private Forms.NotifyIcon? _notifyIcon;
+    private NotifyIcon? _notifyIcon;
     private Forms.Timer? _timer;
-    private Forms.ContextMenuStrip? _contextMenu;
+    private ContextMenuStrip? _contextMenu;
 
     protected override void OnStartup(System.Windows.StartupEventArgs e)
     {
         base.OnStartup(e);
 
-        _contextMenu = new Forms.ContextMenuStrip();
-        _contextMenu.Items.Add(
-            new Forms.ToolStripMenuItem("Exit", null, (_, _) => Shutdown()));
+        _contextMenu = new ContextMenuStrip();
+        _contextMenu.Items.Add(new ToolStripMenuItem("Exit", null, (_, _) => Shutdown()));
 
-        _notifyIcon = new Forms.NotifyIcon
+        _notifyIcon = new NotifyIcon
         {
             Icon = new Icon(Path.Combine(AppContext.BaseDirectory, "Earth-icon.ico")),
             Visible = true,
@@ -81,13 +79,15 @@ public partial class App : System.Windows.Application
     private static string GetTimeForTimeZone(string timezoneId)
     {
         string resolvedId = timezoneId;
+
         if (TimeZoneInfo.TryConvertIanaIdToWindowsId(timezoneId, out string? windowsId))
         {
             resolvedId = windowsId;
         }
 
-        TimeZoneInfo timezone = TimeZoneInfo.FindSystemTimeZoneById(resolvedId);
-        DateTimeOffset localTime = TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, timezone);
+        var timezone = TimeZoneInfo.FindSystemTimeZoneById(resolvedId);
+        var localTime = TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, timezone);
+
         return localTime.ToString("HH:mm");
     }
 }
